@@ -1,3 +1,12 @@
+<script setup lang="ts">
+type PropTypes={
+  ingresos: number;
+  gastos: number;
+}
+
+defineProps<PropTypes>();
+
+</script>
 <template>
     <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
       <div class="col">
@@ -8,7 +17,7 @@
             </h3>
           </div>
           <div class="card-body">
-            <p class="card-text h2 text-center text-success">+ $100.00</p>
+            <p class="card-text h2 text-center text-success">+ ${{ ingresos.toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -19,7 +28,7 @@
             </h3>
           </div>
           <div class="card-body">
-            <p class="card-text h2 text-center text-danger">- $100.00</p>
+            <p class="card-text h2 text-center text-danger"> ${{ gastos.toFixed(2) }}</p>
           </div>
         </div>
       </div>

@@ -49,6 +49,22 @@ const totalTransactions = computed(() => {
   return transacciones.value.length;
 });
 
+const ingresos = computed(()=>{
+  return transacciones.value
+        .filter((transaccion) => transaccion.costo > 0)
+        .reduce((acc,transaccion)=>{
+          return acc +transaccion.costo
+        },0)
+})
+
+const gastos = computed(()=>{
+  return transacciones.value
+        .filter((transaccion) => transaccion.costo < 0)
+        .reduce((acc,transaccion)=>{
+          return acc +transaccion.costo
+        },0)
+})
+
 </script>
 
 <template>
@@ -67,7 +83,7 @@ const totalTransactions = computed(() => {
     <div class="border-bottom border-primary">
     </div>
     <!--Resumen-->
-    <ResumenApp/>
+    <ResumenApp :ingresos="ingresos" :gastos="gastos"/>
     <!--/Resumen-->
     <!--HistorialTransacciones-->
     <HistorialTransaccionesApp :transacciones="transacciones"/>
