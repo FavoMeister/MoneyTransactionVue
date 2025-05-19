@@ -46,6 +46,13 @@ const agregarTransaccion = (transaccion: Transaccion) =>{
   toast.success('Transacción agregada exitosamente');
 }
 
+const eliminarTransaccion =(transaccionId:number)=>{
+  transacciones.value = transacciones.value.filter(
+    (transaccion)=> transaccion.id!==transaccionId
+  );
+  toast.success('Transacción eliminada.');
+}
+
 // Computed
 const total = computed(() => {
   return transacciones.value.reduce((suma, transaccion) => {
@@ -95,7 +102,7 @@ const gastos = computed(()=>{
     <ResumenApp :ingresos="ingresos" :gastos="gastos"/>
     <!--/Resumen-->
     <!--HistorialTransacciones-->
-    <HistorialTransaccionesApp :transacciones="transacciones"/>
+    <HistorialTransaccionesApp :transacciones="transacciones" @eliminar-transaccion="eliminarTransaccion"/>
     <!--/HistorialTransacciones-->
     <!--AgregarTransaccion-->
     <AgregarTransaccionApp @agregar-transaccion="agregarTransaccion"/>

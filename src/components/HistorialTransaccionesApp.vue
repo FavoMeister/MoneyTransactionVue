@@ -7,6 +7,12 @@ type PropTypes = {
 
 defineProps<PropTypes>();
 
+const emit = defineEmits<{
+  (e: 'eliminar-transaccion',transaccionId:number):void
+}>();
+
+const eliminarTransaccion = (transaccionId:number)=>emit('eliminar-transaccion',transaccionId);
+
 </script>
 <template>
     <div class="row mt-3">
@@ -25,7 +31,8 @@ defineProps<PropTypes>();
                 {{ transaccion.costo }}
               </div>
               <div class="col-2">
-                <button class="btn btn-danger border" aria-label="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                <button class="btn btn-danger border" aria-label="Eliminar"
+                  @click="eliminarTransaccion(transaccion.id)"><i class="fa-solid fa-trash"></i></button>
               </div>
             </div>
           </div>
