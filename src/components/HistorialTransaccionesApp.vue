@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { Transaccion } from '@/types/types';
 
-defineProps<{
+type PropTypes = {
     transacciones: Transaccion[]
-}>();
+};
+
+defineProps<PropTypes>();
 
 </script>
 <template>
