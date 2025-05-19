@@ -8,6 +8,8 @@ import AgregarTransaccionApp from './AgregarTransaccionApp.vue';
 
 import { computed, ref } from 'vue';
 import type { Transaccion } from '@/types/types';
+import {useToast} from 'vue-toastification';
+const toast = useToast();
 
 const transacciones = ref<Transaccion[]>([
     {
@@ -36,6 +38,13 @@ const transacciones = ref<Transaccion[]>([
         costo: -10000
     }
 ]);
+
+//Métodos
+const agregarTransaccion = (transaccion: Transaccion) =>{
+  transaccion.id = transacciones.value.length+1;
+  transacciones.value.push(transaccion);
+  toast.success('Transacción agregada exitosamente');
+}
 
 // Computed
 const total = computed(() => {
@@ -89,7 +98,7 @@ const gastos = computed(()=>{
     <HistorialTransaccionesApp :transacciones="transacciones"/>
     <!--/HistorialTransacciones-->
     <!--AgregarTransaccion-->
-    <AgregarTransaccionApp/>
+    <AgregarTransaccionApp @agregar-transaccion="agregarTransaccion"/>
     <!--/AgregarTransaccion-->
   </div>
 </template>
