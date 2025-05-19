@@ -5,6 +5,38 @@ import NumeroTransaccionesApp from './NumeroTransaccionesApp.vue';
 import ResumenApp from './ResumenApp.vue';
 import HistorialTransaccionesApp from './HistorialTransaccionesApp.vue';
 import AgregarTransaccionApp from './AgregarTransaccionApp.vue';
+
+import { ref } from 'vue';
+import type { Transaccion } from '@/types/types';
+
+const transacciones = ref<Transaccion[]>([
+    {
+        id: 1,
+        nombre: 'Salario',
+        costo: 10000
+    },
+    {
+        id: 2,
+        nombre: 'Guitarra Fender',
+        costo: -10000
+    },
+    {
+        id: 3,
+        nombre: 'Venta Punto de venta',
+        costo: 60000
+    },
+    {
+        id: 4,
+        nombre: 'Compra Guitarra Acústica',
+        costo: -10000
+    },
+    {
+        id: 5,
+        nombre: 'Compra Cuerdas Guitarra',
+        costo: -10000
+    }
+]);
+
 </script>
 
 <template>
@@ -26,7 +58,7 @@ import AgregarTransaccionApp from './AgregarTransaccionApp.vue';
     <ResumenApp/>
     <!--/Resumen-->
     <!--HistorialTransacciones-->
-    <HistorialTransaccionesApp/>
+    <HistorialTransaccionesApp :transacciones="transacciones"/>
     <!--/HistorialTransacciones-->
     <!--AgregarTransaccion-->
     <AgregarTransaccionApp/>
