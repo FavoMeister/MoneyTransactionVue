@@ -6,7 +6,7 @@ import ResumenApp from './ResumenApp.vue';
 import HistorialTransaccionesApp from './HistorialTransaccionesApp.vue';
 import AgregarTransaccionApp from './AgregarTransaccionApp.vue';
 
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { Transaccion } from '@/types/types';
 
 const transacciones = ref<Transaccion[]>([
@@ -37,6 +37,18 @@ const transacciones = ref<Transaccion[]>([
     }
 ]);
 
+// Computed
+const total = computed(() => {
+  return transacciones.value.reduce((suma, transaccion) => {
+    return suma + transaccion.costo
+  }, 0);
+});
+
+// Balance Computed
+const totalTransactions = computed(() => {
+  return transacciones.value.length;
+});
+
 </script>
 
 <template>
@@ -46,10 +58,10 @@ const transacciones = ref<Transaccion[]>([
     <!--/Encabezado-->
     <div class="row mt-3">
       <!--Balance-->
-      <BalanceApp/>
+      <BalanceApp :total="total"/>
       <!--/Balance-->
       <!--NumeroTransacciones-->
-      <NumeroTransaccionesApp/>
+      <NumeroTransaccionesApp :total-transacciones="totalTransactions"/>
       <!--/NumeroTransacciones-->
     </div>
     <div class="border-bottom border-primary">
